@@ -351,6 +351,10 @@ async function iniciarApp() {
     abrirAuth()
     mostrarLoginTela()
   }
+window.login = login
+window.cadastrar = cadastrar
+window.mostrarCadastro = mostrarCadastro
+window.mostrarLogin = mostrarLogin
 }
 
 iniciarApp()
