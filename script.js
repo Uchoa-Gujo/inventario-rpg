@@ -1,3 +1,50 @@
+import { supabase } from './supabase.js'
+
+/* =========================
+   🔐 LOGIN / AUTH
+========================= */
+
+async function cadastrar(email, senha) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password: senha
+  })
+
+  if (error) {
+    alert(error.message)
+    return null
+  }
+
+  return data
+}
+
+async function entrar(email, senha) {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password: senha
+  })
+
+  if (error) {
+    alert(error.message)
+    return null
+  }
+
+  return data
+}
+
+async function pegarUsuarioAtual() {
+  const { data } = await supabase.auth.getUser()
+  return data.user
+}
+
+/* =========================
+   📦 SEU CÓDIGO NORMAL
+========================= */
+
+const GRID_COLS = 6;
+const GRID_ROWS = 6;
+...
+
 const GRID_COLS = 6;
 const GRID_ROWS = 6;
 const CELL_SIZE = 64;
@@ -1897,6 +1944,7 @@ equipmentSlots.forEach((slotEl) => {
     if (equipItemToSlot(selected, slotEl.dataset.slot)) playSound("equip");
     else playSound("error");
     render();
+    
   });
 });
 
