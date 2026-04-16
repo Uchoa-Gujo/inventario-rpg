@@ -5,253 +5,160 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Inventário RPG</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .hidden {
-      display: none !important;
-    }
-
-    #authScreen {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: #0b1220;
-    }
-
-    .auth-card {
-      width: 100%;
-      max-width: 420px;
-      background: #111a2b;
-      border: 1px solid #22314d;
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
-
-    .auth-card h1 {
-      margin: 0 0 8px;
-      font-size: 32px;
-      color: #fff;
-    }
-
-    .auth-card p {
-      margin: 0 0 20px;
-      color: #9fb0cc;
-    }
-
-    .auth-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .auth-tab {
-      flex: 1;
-      border: 0;
-      border-radius: 12px;
-      padding: 12px;
-      cursor: pointer;
-      background: #1c2940;
-      color: #dce7ff;
-      font-weight: 600;
-    }
-
-    .auth-tab.active {
-      background: #27c199;
-      color: #08141d;
-    }
-
-    .auth-form {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .auth-form label {
-      color: #dce7ff;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .auth-form input {
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid #2b3b59;
-      background: #0b1220;
-      color: white;
-      border-radius: 12px;
-      padding: 12px 14px;
-      outline: none;
-    }
-
-    .auth-form input:focus {
-      border-color: #27c199;
-    }
-
-    .auth-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .auth-btn {
-      flex: 1;
-      border: 0;
-      border-radius: 12px;
-      padding: 12px;
-      cursor: pointer;
-      font-weight: 700;
-    }
-
-    .auth-btn.primary {
-      background: #27c199;
-      color: #08141d;
-    }
-
-    .auth-btn.secondary {
-      background: #24334f;
-      color: #dce7ff;
-    }
-
-    .auth-message {
-      min-height: 22px;
-      margin-top: 10px;
-      color: #ffcf6b;
-      font-size: 14px;
-    }
-
-    #logoutBar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    #loggedUserText {
-      color: #dce7ff;
-      font-weight: 600;
-    }
-
-    #logoutBtn {
-      border: 0;
-      border-radius: 10px;
-      padding: 10px 14px;
-      cursor: pointer;
-      background: #a93d3d;
-      color: white;
-      font-weight: 700;
-    }
-  </style>
 </head>
 <body>
-  <!-- TELA DE LOGIN / CADASTRO -->
-<div id="authScreen">
+  <section id="authScreen" class="auth-screen">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
 
-  <div class="auth-card">
-    <h2 id="authTitle">Login</h2>
-
-    <input id="username" placeholder="Usuário">
-    <input id="password" type="password" placeholder="Senha">
-
-    <button onclick="login()">Entrar</button>
-
-    <p>
-      Não tem conta?
-      <span onclick="mostrarCadastro()" style="cursor:pointer; color:cyan;">
-        Criar conta
-      </span>
-    </p>
-
-    <div id="cadastroArea" style="display:none;">
-      <input id="password2" type="password" placeholder="Confirmar senha">
-      <button onclick="cadastrar()">Criar conta</button>
-
-      <p>
-        Já tem conta?
-        <span onclick="mostrarLogin()" style="cursor:pointer; color:cyan;">
-          Voltar
-        </span>
-      </p>
-    </div>
-
-  </div>
-
-</div>
-
-<!-- APP / INVENTÁRIO -->
-<div id="appScreen" class="hidden">
-  <!-- TODO O SEU INVENTÁRIO AQUI DENTRO -->
-</div>
-  <!-- seu inventário inteiro -->
-</div>
     <div class="auth-card">
-      <h1>Inventário RPG</h1>
-      <p>Entre com seu usuário e senha.</p>
+      <div class="auth-header">
+        <span class="auth-badge">Sistema Online</span>
+        <h1>Inventário RPG</h1>
+        <p>Entre com seu usuário para acessar e salvar seu personagem automaticamente.</p>
+      </div>
 
       <div class="auth-tabs">
         <button id="showLoginTab" class="auth-tab active" type="button">Login</button>
         <button id="showRegisterTab" class="auth-tab" type="button">Criar conta</button>
       </div>
 
-      <!-- LOGIN -->
       <div id="loginFormBox">
         <div class="auth-form">
-          <div>
+          <div class="field">
             <label for="loginUsuario">Usuário</label>
-            <input type="text" id="loginUsuario" placeholder="Seu usuário" autocomplete="username" />
+            <input id="loginUsuario" type="text" placeholder="Digite seu usuário" autocomplete="username" />
           </div>
 
-          <div>
+          <div class="field">
             <label for="loginSenha">Senha</label>
-            <input type="password" id="loginSenha" placeholder="Sua senha" autocomplete="current-password" />
+            <div class="password-box">
+              <input id="loginSenha" type="password" placeholder="Digite sua senha" autocomplete="current-password" />
+              <button class="toggle-password" type="button" data-target="loginSenha">👁</button>
+            </div>
+          </div>
+
+          <div class="check-line">
+            <label class="checkbox">
+              <input id="rememberSession" type="checkbox" checked />
+              <span>Manter sessão conectada</span>
+            </label>
           </div>
 
           <div class="auth-actions">
-            <button id="loginBtn" class="auth-btn primary" type="button">Entrar</button>
+            <button id="loginBtn" class="btn primary" type="button">Entrar</button>
           </div>
         </div>
       </div>
 
-      <!-- CADASTRO -->
       <div id="registerFormBox" class="hidden">
         <div class="auth-form">
-          <div>
+          <div class="field">
             <label for="registerUsuario">Usuário</label>
-            <input type="text" id="registerUsuario" placeholder="Crie um usuário" autocomplete="username" />
+            <input id="registerUsuario" type="text" placeholder="Crie seu usuário" autocomplete="username" />
           </div>
 
-          <div>
+          <div class="field">
+            <label for="registerConfirmarUsuario">Confirmar usuário</label>
+            <input id="registerConfirmarUsuario" type="text" placeholder="Repita o usuário" autocomplete="username" />
+          </div>
+
+          <div class="field">
             <label for="registerSenha">Senha</label>
-            <input type="password" id="registerSenha" placeholder="Crie uma senha" autocomplete="new-password" />
+            <div class="password-box">
+              <input id="registerSenha" type="password" placeholder="Crie sua senha" autocomplete="new-password" />
+              <button class="toggle-password" type="button" data-target="registerSenha">👁</button>
+            </div>
           </div>
 
-          <div>
+          <div class="field">
             <label for="registerConfirmarSenha">Confirmar senha</label>
-            <input type="password" id="registerConfirmarSenha" placeholder="Repita a senha" autocomplete="new-password" />
+            <div class="password-box">
+              <input id="registerConfirmarSenha" type="password" placeholder="Repita a senha" autocomplete="new-password" />
+              <button class="toggle-password" type="button" data-target="registerConfirmarSenha">👁</button>
+            </div>
           </div>
 
-          <div class="auth-actions">
-            <button id="registerBtn" class="auth-btn primary" type="button">Criar conta</button>
-            <button id="backToLoginBtn" class="auth-btn secondary" type="button">Voltar</button>
+          <div class="field">
+            <label for="registerFrase">Confirmação</label>
+            <input id="registerFrase" type="text" placeholder='Digite: quero criar minha conta' />
+          </div>
+
+          <div class="check-line">
+            <label class="checkbox">
+              <input id="registerConfirmacao" type="checkbox" />
+              <span>Confirmo que desejo criar esta conta</span>
+            </label>
+          </div>
+
+          <div class="auth-actions two">
+            <button id="registerBtn" class="btn primary" type="button">Criar conta</button>
+            <button id="backToLoginBtn" class="btn secondary" type="button">Voltar</button>
           </div>
         </div>
       </div>
 
       <div id="authMessage" class="auth-message"></div>
     </div>
-  </div>
+  </section>
 
-  <!-- APP / INVENTÁRIO -->
-  <div id="appScreen" class="hidden">
-    <div id="logoutBar">
-      <span id="loggedUserText"></span>
-      <button id="logoutBtn" type="button">Sair</button>
+  <section id="appScreen" class="hidden">
+    <div class="app">
+      <header class="topbar">
+        <div>
+          <h1>Inventário RPG</h1>
+          <p id="loggedUserText">Usuário:</p>
+        </div>
+
+        <div class="topbar-actions">
+          <span id="saveStatus" class="save-status">Tudo salvo</span>
+          <button id="logoutBtn" class="btn danger" type="button">Sair</button>
+        </div>
+      </header>
+
+      <main class="layout">
+        <aside class="panel">
+          <h2>Personagem</h2>
+
+          <div class="field">
+            <label for="characterName">Nome</label>
+            <input id="characterName" class="main-input" type="text" placeholder="Nome do personagem" />
+          </div>
+
+          <div class="field">
+            <label for="characterClass">Classe</label>
+            <input id="characterClass" class="main-input" type="text" placeholder="Classe" />
+          </div>
+
+          <div class="field">
+            <label for="characterLevel">Nível</label>
+            <input id="characterLevel" class="main-input" type="number" min="1" placeholder="Nível" />
+          </div>
+
+          <div class="field">
+            <label for="strengthInput">Força</label>
+            <input id="strengthInput" class="main-input" type="number" min="0" placeholder="Força" />
+          </div>
+        </aside>
+
+        <section class="panel">
+          <h2>Itens</h2>
+
+          <div class="item-creator">
+            <input id="itemNameInput" class="main-input" type="text" placeholder="Nome do item" />
+            <button id="addItemBtn" class="btn primary" type="button">Adicionar</button>
+          </div>
+
+          <div id="itemsList" class="items-list"></div>
+        </section>
+
+        <aside class="panel">
+          <h2>Anotações</h2>
+          <textarea id="notesInput" class="main-textarea" placeholder="Anotações do personagem..."></textarea>
+        </aside>
+      </main>
     </div>
-    <div class="app-shell">
-    </div>
-  </div>
+  </section>
 
   <script type="module" src="script.js"></script>
 </body>
