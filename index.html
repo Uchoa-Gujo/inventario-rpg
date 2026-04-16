@@ -147,11 +147,43 @@
 </head>
 <body>
   <!-- TELA DE LOGIN / CADASTRO -->
-  <div id="authScreen">
-  <!-- login e criar conta -->
+<div id="authScreen">
+
+  <div class="auth-card">
+    <h2 id="authTitle">Login</h2>
+
+    <input id="username" placeholder="Usuário">
+    <input id="password" type="password" placeholder="Senha">
+
+    <button onclick="login()">Entrar</button>
+
+    <p>
+      Não tem conta?
+      <span onclick="mostrarCadastro()" style="cursor:pointer; color:cyan;">
+        Criar conta
+      </span>
+    </p>
+
+    <div id="cadastroArea" style="display:none;">
+      <input id="password2" type="password" placeholder="Confirmar senha">
+      <button onclick="cadastrar()">Criar conta</button>
+
+      <p>
+        Já tem conta?
+        <span onclick="mostrarLogin()" style="cursor:pointer; color:cyan;">
+          Voltar
+        </span>
+      </p>
+    </div>
+
+  </div>
+
 </div>
 
+<!-- APP / INVENTÁRIO -->
 <div id="appScreen" class="hidden">
+  <!-- TODO O SEU INVENTÁRIO AQUI DENTRO -->
+</div>
   <!-- seu inventário inteiro -->
 </div>
     <div class="auth-card">
