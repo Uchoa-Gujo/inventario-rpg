@@ -1944,7 +1944,20 @@ equipmentSlots.forEach((slotEl) => {
     if (equipItemToSlot(selected, slotEl.dataset.slot)) playSound("equip");
     else playSound("error");
     render();
-    
+    const emailInput = document.getElementById('email')
+const senhaInput = document.getElementById('senha')
+
+document.getElementById('btnCadastro').addEventListener('click', async () => {
+  await cadastrar(emailInput.value, senhaInput.value)
+})
+
+document.getElementById('btnLogin').addEventListener('click', async () => {
+  const user = await entrar(emailInput.value, senhaInput.value)
+
+  if (user) {
+    alert('Logado com sucesso!')
+  }
+})
   });
 });
 
